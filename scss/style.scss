@@ -51,7 +51,6 @@ button {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    max-height: 100%;
 }
 
 .header {
@@ -86,83 +85,71 @@ button {
     flex-grow: 1;
     .main-container {
         @extend %container;
-        display: grid;
-        grid-template-columns: 280px 1fr;
-        grid-template-rows: repeat(1, 1fr/* 900px */);
-        height: 100%;
-        max-height: 100%;
+        display: flex;
+        justify-content: space-between;
     }
     
     .categories {
-        width: 240px;
+        width: 300px;
         background-color: $light-gray;
         height: 300px;
     }
     
     .books {
         width: 100%;
-        max-height: calc(100% - 96px);
-        max-height: 100%;
+        height: 100%;
+        padding: 0 20px;
     }
 
     .books-grid {
         padding: 0 5px 0 5px;
         height: 100%;
-        max-height: calc(100% - 96px);
-        display: grid; 
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: repeat(2, 1fr);
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
         gap: 20px;
 
         .product-card {
             background-color: aqua;
-            width: 100%;
-            height: 330px;;
-            max-height: 330px;
-            max-height: 100%;
+            width: 224px;
+            max-height: 350px;
+            min-height: 350px;
             display: flex;
             flex-direction: column;
-            padding: 0 10px;
-
+            padding: 0 20px;
+            
             &__img-div {
                 height: 100%;
                 max-height: 200px;
                 text-align: center;
+            }
 
-                img {
-                    max-height: 200px;
-                }
+            &__main {
+                padding: 0 10px;
             }
 
             &__text {
                 max-height: 130px;
-                height: 130px;
+                height: 100%;
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between
-            }
-
-            &__main {
-                height: 100%;
-
-                
+                justify-content: space-between;
             }
 
             &__author {
                 font-size: 14px;
+                        
             }
 
             &__title {
                 font-size: 16px;
-                max-height: 80px;
-                overflow: hidden;               
+                
             }
 
             &__footer {
                 display: flex;
                 justify-content: space-between;
-                height: 100%;
-                align-items: center;
+                align-items: center;               
             }
 
             &__price {
@@ -172,10 +159,9 @@ button {
     }
 
     .btn-div {
-        width: 300px;
+        width: 146px;
         margin: 0 auto;
-        padding-top: 40px;
-        
+        padding: 20px 12px;  
     }
 }
 
@@ -194,8 +180,101 @@ button {
     }
 }
 
+.pagination {
+    padding: 20px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
 .footer {
     height: 86px;
     min-height: 86px;
     background-color: blue;
+}
+
+.product-container {
+    max-width: 860px;
+    height: 100%;
+    dmargin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.product-info {
+    background-color: beige;
+    width: 100%;
+    display: flex;
+    position: relative;
+    margin-bottom: 30px;
+
+    &__back {
+        background: transparent;
+        position: absolute;
+        top: 0;
+        left: -80px;
+        font-size: 14px;
+        color: teal;
+        transition: all 0.25s;
+
+        &:hover {
+            scale: 1.2;
+        }
+    }
+
+    &__left {
+        height: 100%;
+        width: 100%;
+        max-width: 500px;
+        background-color: aquamarine;
+        padding: 20px;
+        text-align: center;
+
+        img {
+            max-width: 407px;
+            max-height: 640px;
+        }
+    }
+
+    &__right {
+        height: 100%;
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    &__title {
+        font-size: 18px;
+    }
+
+    &__description {
+        max-height: 100%;
+        background-color: yellow;
+        font-size: 14px;
+    }
+
+    &__to-cart {        
+        display: flex;
+        justify-content: flex-end;
+        gap: 30px;
+        padding: 30px 0;
+    }
+
+    &__qty {
+        width: 55px;
+        height: 25px;
+        outline: 0;
+        border: 1px solid black;
+        border-radius: 5px;
+    }
 }

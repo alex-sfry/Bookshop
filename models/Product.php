@@ -30,7 +30,6 @@ class Product
             $productList[$i]['isNew'] = $row['isNew'];
             $i++;
         }
-
         return $productList;
     }
 
@@ -52,16 +51,32 @@ class Product
             $i = 0;
 
             while ($row = $result->fetch()) {
-                $productList[$i]['id'] = $row['id'];
-                $productList[$i]['author'] = $row['author'];
-                $productList[$i]['name'] = $row['name'];
-                $productList[$i]['price'] = $row['price'];
-                $productList[$i]['image'] = $row['image'];
-                $productList[$i]['isNew'] = $row['isNew'];
+                $products[$i]['id'] = $row['id'];
+                $products[$i]['author'] = $row['author'];
+                $products[$i]['name'] = $row['name'];
+                $products[$i]['price'] = $row['price'];
+                $products[$i]['image'] = $row['image'];
+                $products[$i]['isNew'] = $row['isNew'];
                 $i++;
             }
 
-            return $productList;
+            return $products;
+        }
+    }
+
+    public static function getProductById($id)
+    {
+        $id = intval($id);
+
+        if ($id) {
+            $db = DBConnect::getConnection();
+
+            $result = $db->query("SELECT *
+                                  FROM books, authors
+                                  WHERE books.id = '$id'
+                                  AND books.author_id = authors.id");
+                                  
+            return $result->fetch();                               
         }
     }
 }

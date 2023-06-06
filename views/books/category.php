@@ -8,8 +8,7 @@
                     <ul class="catalog-ul">
                         <?php foreach ($category as $categoryItem) : ?>
                             <li class="catalog-ul__item">
-                                <a href="/category/<?php echo $categoryItem['id']; ?>"
-                                class="<?php if ($categoryId == $categoryItem['id']) echo 'active' ?>">
+                                <a href="/category/<?php echo $categoryItem['id']; ?>" class="<?php if ($categoryId == $categoryItem['id']) echo 'active' ?>">
                                     <?php echo $categoryItem['name']; ?>
                                 </a>
                             </li>
@@ -21,30 +20,44 @@
             <section class="books">
                 <div class="books-grid">
                     <?php foreach ($categoryProducts as $product) : ?>
-                        <div class="product-card">                           
+                        <div class="product-card">
                             <div class="product-card__img-div">
                                 <img src="<?php echo $product['image']; ?>" alt="" width='120'>
-                            </div>    
+                            </div>
                             <div class="product-card__text">
                                 <div class="product-card__main">
                                     <a href="<?php echo '/product/' . $product['id']; ?>">
                                         <p class="product-card__author"><?php echo $product['author']; ?></p>
                                         <h3 class="product-card__title"><?php echo $product['name']; ?></h3>
-                                    </a>                                    
-                                </div>                                             
+                                    </a>
+                                </div>
                                 <div class="product-card__footer">
                                     <p class="product-card__price"><?php echo $product['price']; ?></p>
                                     <div class="product-card__add-to-cart">
                                         <button>В корзину</button>
                                     </div>
                                 </div>
-                            </div>                         
+                            </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
-                <div class="btn-div">
-                    <button class="btn-div__btn">Загрузить еще...</button>
-                </div>
+                <ul class="pagination">
+                    <li class="pagination__item">
+                        <a href="">1</a>
+                    </li>
+                    <li class="pagination__item">
+                        <a href="">2</a>
+                    </li>
+                    <li class="pagination__item">
+                        <a href="">3</a>
+                    </li>
+                    <li class="pagination__item">
+                        <a href="">4</a>
+                    </li>
+                    <li class="pagination__item">
+                        <a href="">5</a>
+                    </li>
+                </ul>
             </section>
         </div>
     </main>
