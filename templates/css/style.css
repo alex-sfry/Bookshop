@@ -91,6 +91,9 @@ button {
   height: 100%;
   padding: 0 20px;
 }
+.main .books .pagination {
+  margin: 0;
+}
 .main .books-grid {
   padding: 0 5px 0 5px;
   height: 100%;
@@ -174,7 +177,6 @@ button {
 .product-container {
   max-width: 860px;
   height: 100%;
-  dmargin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -244,6 +246,62 @@ button {
   outline: 0;
   border: 1px solid black;
   border-radius: 5px;
+}
+
+.reg-form-container {
+  height: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup span {
+  font-size: 14px;
+  color: red;
+  font-weight: 600;
+  text-align: center;
+}
+.signup__title {
+  font-size: 20px;
+  padding: 20px 0px 10px 0;
+  text-align: center;
+}
+.signup__success {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+}
+
+.reg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 70px;
+  width: 100%;
+}
+.reg-form input {
+  height: 30px;
+  outline: 0;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  background-color: rgb(183, 172, 163);
+  color: #000;
+  width: 100%;
+}
+.reg-form input::placeholder {
+  color: #000;
+  font-style: italic;
+  font-size: 14px;
+}
+.reg-form__btn-submit {
+  width: 160px;
+  height: 40px;
+  background-color: cornflowerblue;
+  color: #fff;
 }
 
 /*# sourceMappingURL=style.css.map */

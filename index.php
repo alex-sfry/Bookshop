@@ -7,8 +7,7 @@ error_reporting(E_ALL);
 
 // 2. connect files
 define('ROOT', dirname(__FILE__));
-require_once(ROOT . '/components/Router.php');
-require_once(ROOT . '/components/DBConnect.php');
+require_once(ROOT . '/components/Autoload.php');
 
 //echo ROOT;
 

@@ -4,8 +4,11 @@ class Product
 {
     const SHOW_BY_DEFAULT = 8;
 
-    public static function getLatestProducts($count = self::SHOW_BY_DEFAULT)
-    {
+    public static function getLatestProducts($count = self::SHOW_BY_DEFAULT, $page = 1)
+    {   
+        $page = intval($page);
+        $offset  = ($page - 1) * $count;
+        
         $count = intval($count);
 
         $db = DBConnect::getConnection();
@@ -17,8 +20,8 @@ class Product
                               WHERE status = "1"
                               AND author_id = authors.id
                               ORDER BY books.id DESC
-                              LIMIT ' . $count);
-
+                              LIMIT ' . $count . ' OFFSET ' . $offset);
+                                
         $i = 0;
 
         while ($row = $result->fetch()) {
@@ -33,9 +36,41 @@ class Product
         return $productList;
     }
 
-    public static function getProductsListByCategory($categoryId = false)
+    public static function getLatestProductsPagesCount()
+    {
+            $db = DBConnect::getConnection();
+
+            $products = array();
+
+            $result = $db->query("SELECT COUNT(*) AS rows_qty
+                                FROM books");
+
+            $count = $result->fetchColumn();
+            $pages_count = $count / 8;
+
+            return  $pages_count;
+    }
+
+    // public static function getLatestProductsCount()
+    // {
+    //         $db = DBConnect::getConnection();
+
+    //         $products = array();
+
+    //         $result = $db->query("SELECT COUNT(*) AS rows_qty
+    //                             FROM books");
+
+    //         $count = $result->fetchColumn();
+
+    //         return  $count;
+    // }
+
+    public static function getProductsListByCategory($categoryId = false, $page = 1)
     {
         if ($categoryId) {
+            $page = intval($page);
+            $offset  = ($page - 1) * self::SHOW_BY_DEFAULT;
+
             $db = DBConnect::getConnection();
 
             $products = array();
@@ -46,7 +81,8 @@ class Product
                                             AND author_id = authors.id
                                             AND category_id = '$categoryId'
                                             ORDER BY books.id DESC
-                                            LIMIT " . self::SHOW_BY_DEFAULT);
+                                            LIMIT " . self::SHOW_BY_DEFAULT
+                                            . " OFFSET " . $offset);
 
             $i = 0;
 
@@ -64,6 +100,24 @@ class Product
         }
     }
 
+    public static function getProductsByCategoryPagesCount($categoryId = false)
+    {
+        if ($categoryId) {
+            $db = DBConnect::getConnection();
+
+            $products = array();
+
+            $result = $db->query("SELECT COUNT(*) AS rows_qty
+                                            FROM books
+                                            WHERE category_id = '$categoryId'");
+
+            $count = $result->fetchColumn();
+            $pages_count = $count / 8;
+
+            return  $pages_count;
+        }
+    }
+
     public static function getProductById($id)
     {
         $id = intval($id);
@@ -75,8 +129,9 @@ class Product
                                   FROM books, authors
                                   WHERE books.id = '$id'
                                   AND books.author_id = authors.id");
-                                  
-            return $result->fetch();                               
+
+            return $result->fetch();
         }
     }
+
 }

@@ -4,7 +4,7 @@
     <main class="main">
         <div class="main-container">
             <section class="categories">
-                <div class="catalog">Каталог:
+                <div class="catalog">
                     <ul class="catalog-ul">
                         <?php foreach ($category as $categoryItem) : ?>
                             <li class="catalog-ul__item">
@@ -39,23 +39,6 @@
                             </div>
                         </div>
                     <?php endforeach; ?>
-                        <ul class="pagination">
-                            <li class="pagination__item">
-                                <a href="">1</a>
-                            </li>
-                            <li class="pagination__item">
-                                <a href="">2</a>
-                            </li>
-                            <li class="pagination__item">
-                                <a href="">3</a>
-                            </li>
-                            <li class="pagination__item">
-                                <a href="">4</a>
-                            </li>
-                            <li class="pagination__item">
-                                <a href="">5</a>
-                            </li>
-                        </ul>
                 </div>
             </section>
         </div>

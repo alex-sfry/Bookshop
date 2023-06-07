@@ -1,10 +1,9 @@
 <div class="wrapper">
     <?php include(ROOT . '/views/layouts/header.php') ?>
-
     <main class="main">
         <div class="main-container">
             <div class="categories">
-                <div class="catalog">Каталог:
+                <div class="catalog">
                     <ul class="catalog-ul">
                         <?php foreach ($category as $categoryItem) : ?>
                             <li class="catalog-ul__item">
@@ -42,21 +41,57 @@
                     <?php endforeach; ?>
                 </div>
                 <ul class="pagination">
-                    <li class="pagination__item">
-                        <a href="">1</a>
-                    </li>
-                    <li class="pagination__item">
-                        <a href="">2</a>
-                    </li>
-                    <li class="pagination__item">
-                        <a href="">3</a>
-                    </li>
-                    <li class="pagination__item">
-                        <a href="">4</a>
-                    </li>
-                    <li class="pagination__item">
-                        <a href="">5</a>
-                    </li>
+                    <?php
+                    $last = 0;
+                    $range = intdiv($page,  4);
+                    //echo $range;
+
+                    // min page in page list
+                    $range >= 1 && $page > $range * 4 ? $i = 4 * $range + 1 : $i = 4 * $range - 3;
+                    $range == 0 && $i = 1;
+
+                    if ($page < 2 && $pages_count > 2) {
+                        if ($pages_count > 3) {
+                            $last = 4;
+                        } else $last = $pages_count;
+                    } else $pages_count - $page > 3 ? $last = $page + 3 : $last = $pages_count;
+
+                    //max page in page list
+                    $range > 0 && $page > $range * 4 ? $last = ($range + 1) * 4 : $last = $range * 4;
+                    $range == 0 &&  $last = 4;
+                    $last > $pages_count && $last = $pages_count + 1;
+
+                    $visibility ='';
+
+                    // todo add css for pagination__arrow_visible, pagination__arrow,
+                    // pagination__link_current, pagination__link
+
+                    if ($pages_count > 1 && $page > 1) {
+                        $visibility = 'class="pagination__arrow_visible"';
+                    } else $visibility = 'pagination__arrow';
+
+                    echo "<li class='pagination__item'>
+                         <a href='/category/" . $categoryId . "/page-" . $page - 1 . "' " . $visibility . "> < </a>
+                         </li>";
+
+                    $cls ='';
+                    
+                    while ($i <= $last) {
+                        $i == $page ? $cls = 'pagination__link_current' : $cls = 'pagination__link';
+                        echo "<li class='pagination__item'>
+                             <a href='/category/" . $categoryId . "/page-" . $i . "' class='" . $cls . "'>" . $i . "</a>
+                             </li>";
+                        $i++;
+                    };
+
+                    if ($pages_count > 1 && $page < $pages_count) {
+                        $visibility = 'class="pagination__arrow_visible"';
+                    } else $visibility = 'pagination__arrow';
+
+                    echo "<li class='pagination__item'>
+                         <a href='/category/" . $categoryId . "/page-" . $page + 1 . "' " . $visibility . "> > </a>
+                         </li>";
+                    ?>
                 </ul>
             </section>
         </div>

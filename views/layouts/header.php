@@ -16,7 +16,7 @@
             <nav class="nav">
                 <ul class="nav-ul">
                     <li class="nav-ul__item"><a href="/">Главная</a></li>
-                    <li class="nav-ul__item"><a href="/books/">Книги</a></li>
+                    <li class="nav-ul__item"><a href="/books/">Каталог</a></li>
                     <li class="nav-ul__item"><a href="/blog/">Блог</a></li>
                 </ul>
             </nav>
@@ -27,7 +27,7 @@
                     </a>
                 </div>
                 <div class="header-right__account">
-                    <a href="/login/">
+                    <a href="/user/register/">
                         Вход
                     </a>
                 </div>

@@ -4,7 +4,7 @@
     <main class="main">
         <div class="main-container">
             <section class="categories">
-                <div class="catalog">Каталог:
+                <div class="catalog">
                     <ul class="catalog-ul">
                         <?php foreach ($category as $categoryItem) : ?>
                             <li class="catalog-ul__item">
