@@ -51,20 +51,6 @@ class Product
             return  $pages_count;
     }
 
-    // public static function getLatestProductsCount()
-    // {
-    //         $db = DBConnect::getConnection();
-
-    //         $products = array();
-
-    //         $result = $db->query("SELECT COUNT(*) AS rows_qty
-    //                             FROM books");
-
-    //         $count = $result->fetchColumn();
-
-    //         return  $count;
-    // }
-
     public static function getProductsListByCategory($categoryId = false, $page = 1)
     {
         if ($categoryId) {

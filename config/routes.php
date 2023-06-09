@@ -10,7 +10,16 @@ return array (
     'category/([0-9]+)/page-([0-9]+)' => 'books/category/$1/$2', // actionCategory in BooksConroller
     'category/([0-9]+)' => 'books/category/$1', // actionCategory in BooksConroller
 
-    'user/register' => 'user/register',  
+    'user/register' => 'user/register', 
+    'user/login' => 'user/login',
+    'user/logout' => 'user/logout', 
 
-    '' => 'site/index', // actionIndex in SiteConroller
+    'account/edit' => 'account/edit',
+    'account' => 'account/index',
+    
+    '(.+)' => 'site/PageNotFound', // 404
+    '' => 'site/index', // actionIndex in SiteConroll
+
+    
+
 );

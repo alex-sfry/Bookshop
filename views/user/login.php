@@ -4,10 +4,6 @@
     <section class="signup">
         <div class="reg-form-container">
             <?php
-            if ($result) {
-                echo "<span class='signup__success'>Вы зарегистрировались!</span>";
-            } else
-
             if (count($errors) > 0) {
                 foreach ($errors as $error) {
                     echo "<span>$error</span>";
@@ -17,12 +13,11 @@
             }
             ?>
 
-            <h1 class="signup__title">Регистрация на сайте</h1>
+            <h1 class="signup__title">Вход на сайт</h1>
             <form action="" method="POST" class="reg-form">
-                <input type="text" name="name" placeholder="Имя" value="<?php echo $name ?>">
                 <input type="email" name="email" placeholder="Email" value="<?php echo $email ?>">
                 <input type="password" name="password" placeholder="Пароль" value="<?php echo $password ?>">
-                <button type="submit" name="submit" class="reg-form__btn-submit">Регистрация</button>
+                <button type="submit" name="submit" class="reg-form__btn-submit">Войти</button>
             </form>
         </div>
     </section>

@@ -10,32 +10,52 @@
 </head>
 
 <body>
-    <header class="header">
-        <div class="header-container">
-            <div class="logo">Bookshop</div>
-            <nav class="nav">
-                <ul class="nav-ul">
-                    <li class="nav-ul__item"><a href="/">Главная</a></li>
-                    <li class="nav-ul__item"><a href="/books/">Каталог</a></li>
-                    <li class="nav-ul__item"><a href="/blog/">Блог</a></li>
-                </ul>
-            </nav>
-            <div class="header-right">
-                <div class="header-right__search">
-                    <a href="/account/">
-                        Аккаунт
-                    </a>
-                </div>
-                <div class="header-right__account">
-                    <a href="/user/register/">
-                        Вход
-                    </a>
-                </div>
-                <div class="header-right__cart">
-                    <a href="/cart/">
-                        Корзина
-                    </a>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header-container">
+                <div class="logo">Bookshop</div>
+                <nav class="nav">
+                    <ul class="nav-ul">
+                        <li class="nav-ul__item"><a href="/">Главная</a></li>
+                        <li class="nav-ul__item"><a href="/books/">Каталог</a></li>
+                        <li class="nav-ul__item"><a href="/blog/">Блог</a></li>
+                    </ul>
+                </nav>
+                <div class="header-right">
+
+                    <?php if (User::isGuest()) : ?>
+
+                        <div>
+                            <a href="/user/login/">
+                                Вход
+                            </a>
+                        </div>
+                        <div>
+                            <a href="/user/register/">
+                                Регистрация
+                            </a>
+                        </div>
+
+                    <?php else : ?>
+
+                        <div>
+                            <a href="/account/">
+                                Аккаунт
+                            </a>
+                        </div>
+                        <div>
+                            <button class="account__logout">
+                                <a href="/user/logout/">Выход</a>
+                            </button>
+                        </div>
+
+                    <?php endif; ?>
+
+                    <div>
+                        <a href="/cart/">
+                            Корзина
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </header>

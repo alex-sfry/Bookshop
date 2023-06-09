@@ -304,4 +304,70 @@ button {
   color: #fff;
 }
 
+.account-container {
+  height: 100%;
+  max-width: 215px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding-top: 110px;
+}
+
+.account__top {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 30px;
+}
+.account__title {
+  font-size: 26px;
+}
+.account__name {
+  font-size: 20px;
+  font-style: italic;
+}
+.account__logout {
+  background-color: transparent;
+}
+.account ul {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 14px;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 70px;
+  width: 100%;
+}
+.edit-form div {
+  width: 100%;
+}
+.edit-form input {
+  height: 30px;
+  outline: 0;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  background-color: rgb(183, 172, 163);
+  color: #000;
+  width: 100%;
+  margin-top: 5px;
+}
+.edit-form input::placeholder {
+  color: #000;
+  font-style: italic;
+  font-size: 14px;
+}
+.edit-form__btn-submit {
+  width: 160px;
+  height: 40px;
+  background-color: cornflowerblue;
+  color: #fff;
+}
+
 /*# sourceMappingURL=style.css.map */
