@@ -32,7 +32,12 @@
                             <div class="product-card__footer">
                                 <p class="product-card__price"><?php echo $product['price']; ?> руб.</p>
                                 <div class="product-card__add-to-cart">
-                                    <button>В корзину</button>
+                                <button 
+                                    class="product-card__to-cart add-to-cart"
+                                    data-id="<?=$product['id']; ?>"
+                                >
+                                    В корзину
+                                </button>
                                 </div>
                             </div>
                         </div>

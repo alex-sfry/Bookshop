@@ -32,7 +32,9 @@
                             <div class="product-card__footer">
                                 <p class="product-card__price"><?php echo $product['price']; ?> руб.</p>
                                 <div class="product-card__add-to-cart">
-                                    <button>В корзину</button>
+                                    <button class="product-card__to-cart add-to-cart" data-id="<?= $product['id']; ?>">
+                                        В корзину
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -67,7 +69,7 @@
 
                 if ($pages_count > 1 && $page > 1) {
                     $visibility = 'class="pagination__arrow_visible"';
-                } else $visibility = 'pagination__arrow';
+                } else $visibility = 'class="pagination__arrow"';
 
                 echo "<li class='pagination__item'>
                         <a href='/category/" . $categoryId . "/page-" . $page - 1 . "' " . $visibility . "> < </a>
@@ -78,14 +80,14 @@
                 while ($i <= $last) {
                     $i == $page ? $cls = 'pagination__link_current' : $cls = 'pagination__link';
                     echo "<li class='pagination__item'>
-                            <a href='/category/" . $categoryId . "/page-" . $i . "' class='" . $cls . "'>" . $i . "</a>
+                            <a href='/category/" . $categoryId . "/page-" . $i . "' " . $cls . ">" . $i . "</a>
                             </li>";
                     $i++;
                 };
 
                 if ($pages_count > 1 && $page < $pages_count) {
                     $visibility = 'class="pagination__arrow_visible"';
-                } else $visibility = 'pagination__arrow';
+                } else $visibility = 'class="pagination__arrow"';
 
                 echo "<li class='pagination__item'>
                         <a href='/category/" . $categoryId . "/page-" . $page + 1 . "' " . $visibility . "> > </a>

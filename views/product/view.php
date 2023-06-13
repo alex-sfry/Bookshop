@@ -30,7 +30,10 @@
                             <div class="product-info__to-cart">
                                 <p><?php echo $product['price']; ?> руб.</p>
                                 <input class="product-info__qty" type="number">
-                                <button>
+                                <button 
+                                    class="product-card__to-cart add-to-cart"
+                                    data-id="<?=$product['id']; ?>"
+                                >
                                     В корзину
                                 </button>
                             </div>
