@@ -11,7 +11,7 @@ return array (
     'category/([0-9]+)' => 'books/category/$1', // actionCategory in BooksConroller
 
     'cart/addAjax/([0-9]+)' => 'cart/addAjax/$1', // actionAddAjax в CartController
-    //'cart/add/([0-9]+)' => 'cart/add/$1', // actionAdd в CartController  
+    //'cart/add/([0-9]+)' => 'cart/add/$1', // actionAdd в CartController for PHP add to cart
     'cart' => 'cart/index', // actionIndex в CartController
 
     'user/register' => 'user/register', 

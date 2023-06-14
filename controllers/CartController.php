@@ -19,7 +19,7 @@ class CartController
 
     public function actionIndex()
     {   
-        echo 'cart';
+        echo '<pre>'; print_r( $_SESSION['products']);
         // $categories = array();
         // $categories = Category::getCategoryList();
 
@@ -30,9 +30,6 @@ class CartController
 
 
         // }
-
-
-
 
         return true;
     } 

@@ -1,31 +1,26 @@
+// handle 'Назад' button
 const backBtn = document.querySelector('.product-info__back');
 if (backBtn) backBtn.addEventListener('click', () => history.back());
 
-const addToCart = document.querySelectorAll('.add-to-cart');
-if (addToCart) {
-    addToCart.forEach(item => {
-        item.addEventListener('click', async (e) => {
-            console.log('click');
-            const id = e.target.getAttribute('data-id');
-            console.log(id);
-            const response = await toCart("/cart/addAjax/" + id);
-            handleResponse(response);
-        });
-    })
-}
+// add to cart 
+const toCart = document.querySelectorAll('.add-to-cart');
+if (toCart) toCart.forEach(item => item.addEventListener('click', handleAddToCart))
 
-async function toCart(url) {
-    return await fetch(url, {
+async function handleAddToCart(e) {
+    const id = e.target.getAttribute('data-id');
+    const url = "/cart/addAjax/" + id;
+    console.log(id);
+
+    const response = await fetch(url, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
     })
-}
+    const result = await response.json();
 
-async function handleResponse(response) {
-    const result = await response.text();
-    const cartCount = document.querySelector('#cart-count');
+    const inCartCount = document.querySelector('#cart-count');   
+    inCartCount.textContent = result;
+
     console.log(result);
-    cartCount.textContent = result;
 }
