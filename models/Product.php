@@ -33,20 +33,21 @@ class Product
             $productList[$i]['isNew'] = $row['isNew'];
             $i++;
         }
+        
         return $productList;
     }
 
-    public static function getLatestProductsPagesCount()
+    public static function getLatestProductsPagesCount($count_per_page = self::SHOW_BY_DEFAULT)
     {
             $db = DBConnect::getConnection();
 
-            $products = array();
+            //$products = array();
 
             $result = $db->query("SELECT COUNT(*) AS rows_qty
                                 FROM books");
 
             $count = $result->fetchColumn();
-            $pages_count = $count / 8;
+            $pages_count = $count / $count_per_page;
 
             return  $pages_count;
     }
@@ -91,14 +92,14 @@ class Product
         if ($categoryId) {
             $db = DBConnect::getConnection();
 
-            $products = array();
+            //$products = array();
 
             $result = $db->query("SELECT COUNT(*) AS rows_qty
                                             FROM books
                                             WHERE category_id = '$categoryId'");
 
             $count = $result->fetchColumn();
-            $pages_count = $count / 8;
+            $pages_count = $count / self::SHOW_BY_DEFAULT;
 
             return  $pages_count;
         }

@@ -108,18 +108,8 @@ button {
     .pagination {
         margin: 0;
 
-        &__arrow {
-            background-color: #000;
-            visibility: hidden;
-        }
-
-        &__arrow_visible {
-            visibility: visible;
-        }
-
-        &__link_current,
-        &__item:hover,
-        &__arrow_visible:hover {
+        &__item_active,
+        &__item:hover {
             background-color: rgb(161, 204, 218);
         }
     }  

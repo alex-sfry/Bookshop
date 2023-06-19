@@ -54,8 +54,7 @@
                     <div>
                         <a href="/cart/">
                             Корзина
-                            <!-- <span id="cart-count"><?=Cart::countItems();?></span> -->
-                            <span id="cart-count"></span>
+                            <span id="cart-count"><?=Cart::countItems();?></span>
                         </a>
                     </div>
                 </div>

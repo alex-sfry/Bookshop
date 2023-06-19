@@ -13,6 +13,8 @@ class BooksController
         $pages_count = Product::getLatestProductsPagesCount();
         //$products_count = Product::getLatestProductsCount();
 
+        $pagination = new Pagination ($pages_count, 1, 4, 'page-');
+
         require_once(ROOT . '/views/books/index.php');
 
         return true;
@@ -27,6 +29,8 @@ class BooksController
         $categoryProducts = array();
         $categoryProducts = Product::getProductsListByCategory($categoryId, $page);
         $pages_count = Product::getProductsByCategoryPagesCount($categoryId);
+
+        $pagination = new Pagination ($pages_count, 1, 4, 'page-');
 
         require_once(ROOT . '/views/books/category.php');
 

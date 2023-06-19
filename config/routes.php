@@ -24,6 +24,4 @@ return array (
     '(.+)' => 'site/PageNotFound', // 404
     '' => 'site/index', // actionIndex in SiteConroll
 
-    
-
 );

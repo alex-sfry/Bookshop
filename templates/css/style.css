@@ -97,14 +97,7 @@ button {
 .main .pagination {
   margin: 0;
 }
-.main .pagination__arrow {
-  background-color: #000;
-  visibility: hidden;
-}
-.main .pagination__arrow_visible {
-  visibility: visible;
-}
-.main .pagination__link_current, .main .pagination__item:hover, .main .pagination__arrow_visible:hover {
+.main .pagination__item_active, .main .pagination__item:hover {
   background-color: rgb(161, 204, 218);
 }
 .main .books-grid {
