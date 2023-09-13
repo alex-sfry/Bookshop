@@ -1,0 +1,378 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+img {
+  border: 0;
+  vertical-align: top;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a[href^=tel] {
+  text-decoration: inherit;
+  color: inherit;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+.main .main-container, .header-container {
+  max-width: 1280px;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  height: 86px;
+  min-height: 86px;
+  background-color: #FFFFFF;
+  align-items: center;
+}
+.header-container {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header .nav-ul {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+.header .nav-ul__item:hover {
+  background-color: rgb(120, 248, 248);
+}
+.header-right {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.main {
+  flex-grow: 1;
+}
+.main .main-container {
+  display: flex;
+  justify-content: space-between;
+}
+.main .categories {
+  width: 300px;
+  background-color: #f6f6f7;
+  height: 300px;
+}
+.main .books {
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+}
+.main .pagination {
+  margin: 0;
+}
+.main .pagination__item_active, .main .pagination__item:hover {
+  background-color: rgb(161, 204, 218);
+}
+.main .books-grid {
+  padding: 0 5px 0 5px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.main .books-grid .product-card {
+  width: 224px;
+  max-height: 350px;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+.main .books-grid .product-card__img-div {
+  height: 100%;
+  max-height: 200px;
+  text-align: center;
+}
+.main .books-grid .product-card__main {
+  padding: 0 10px;
+}
+.main .books-grid .product-card__text {
+  max-height: 130px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.main .books-grid .product-card__author {
+  font-size: 14px;
+}
+.main .books-grid .product-card__title {
+  font-size: 16px;
+}
+.main .books-grid .product-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main .books-grid .product-card__price {
+  font-size: 14px;
+}
+.main .btn-div {
+  width: 146px;
+  margin: 0 auto;
+  padding: 20px 12px;
+}
+
+.catalog {
+  padding: 10px 15px 0 15px;
+}
+
+.catalog-ul {
+  padding: 15px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.catalog-ul a.active {
+  background-color: blueviolet;
+}
+
+.pagination {
+  padding: 20px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.footer {
+  height: 86px;
+  min-height: 86px;
+}
+
+.product-container {
+  max-width: 860px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.product-info {
+  width: 100%;
+  display: flex;
+  position: relative;
+  margin-bottom: 30px;
+}
+.product-info__back {
+  background: transparent;
+  position: absolute;
+  top: 0;
+  left: -80px;
+  font-size: 14px;
+  color: teal;
+  transition: all 0.25s;
+}
+.product-info__back:hover {
+  scale: 1.2;
+}
+.product-info__left {
+  height: 100%;
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+.product-info__left img {
+  max-width: 407px;
+  max-height: 640px;
+}
+.product-info__right {
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+.product-info__info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.product-info__title {
+  font-size: 18px;
+}
+.product-info__description {
+  max-height: 100%;
+  font-size: 14px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.4);
+}
+.product-info__to-cart {
+  display: flex;
+  justify-content: flex-end;
+  gap: 30px;
+  padding: 30px 0;
+}
+.product-info__qty {
+  width: 55px;
+  height: 25px;
+  outline: 0;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.reg-form-container {
+  height: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup span {
+  font-size: 14px;
+  color: red;
+  font-weight: 600;
+  text-align: center;
+}
+.signup__title {
+  font-size: 20px;
+  padding: 20px 0px 10px 0;
+  text-align: center;
+}
+.signup__success {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+}
+
+.reg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 70px;
+  width: 100%;
+}
+.reg-form input {
+  height: 30px;
+  outline: 0;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  background-color: rgb(204, 201, 199);
+  color: #000;
+  width: 100%;
+}
+.reg-form input::placeholder {
+  color: #000;
+  font-style: italic;
+  font-size: 14px;
+}
+.reg-form__btn-submit {
+  width: 160px;
+  height: 40px;
+  background-color: cornflowerblue;
+  color: #fff;
+}
+
+.account-container {
+  height: 100%;
+  max-width: 215px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding-top: 110px;
+}
+
+.account__top {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 30px;
+}
+.account__title {
+  font-size: 26px;
+}
+.account__name {
+  font-size: 20px;
+  font-style: italic;
+}
+.account__logout {
+  background-color: transparent;
+}
+.account ul {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 14px;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 70px;
+  width: 100%;
+}
+.edit-form div {
+  width: 100%;
+}
+.edit-form input {
+  height: 30px;
+  outline: 0;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  background-color: rgb(204, 201, 199);
+  color: #000;
+  width: 100%;
+  margin-top: 5px;
+}
+.edit-form input::placeholder {
+  color: #000;
+  font-style: italic;
+  font-size: 14px;
+}
+.edit-form__btn-submit {
+  width: 160px;
+  height: 40px;
+  background-color: cornflowerblue;
+  color: #fff;
+}
+
+/*# sourceMappingURL=style.css.map */
