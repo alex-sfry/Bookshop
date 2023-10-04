@@ -43,7 +43,7 @@ class AccountController
             }
 
             if (count($errors) == 0) {
-                $result =$user_obj->Edit($userId, $name, $password);
+                $result =$user_obj->edit($userId, $name, $password);
             }
         }
 

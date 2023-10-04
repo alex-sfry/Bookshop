@@ -4,24 +4,21 @@ use App\Cart\Cart;
 
 class CartController
 {   
-    private $cart_obj;
-    
-    public function __construct()
-    {   
-        $this->cart_obj = new Cart();
-    }
-
     public function actionAdd($id)
     {   
-        $this->cart_obj->addProduct($id);
+        $cart_obj = new Cart();
+
+        $cart_obj->addProduct($id);
 
         $referer = $_SERVER['HTTP_REFERER'];
         header("Location: $referer");
     }
 
     public function actionAddAjax($id)
-    {           
-        echo json_encode( $this->cart_obj->addProduct($id));
+    {   
+        $cart_obj = new Cart();
+
+        echo json_encode( $cart_obj->addProduct($id));
 
         return true;
     }

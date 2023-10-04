@@ -43,8 +43,6 @@ class Product
     {
             $db = DBConnect::getConnection();
 
-            //$products = array();
-
             $result = $db->query("SELECT COUNT(*) AS rows_qty
                                 FROM books");
 
@@ -93,8 +91,6 @@ class Product
     {
         if ($categoryId) {
             $db = DBConnect::getConnection();
-
-            //$products = array();
 
             $result = $db->query("SELECT COUNT(*) AS rows_qty
                                             FROM books

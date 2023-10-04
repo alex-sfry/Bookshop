@@ -6,25 +6,16 @@ use App\Model\Product;
 
 class SiteController
 {   
-    private $category_obj;
-    private $product_obj;
-    
-    public function __construct()
-    {   
-        $this->category_obj = new Category();
-        $this->product_obj = new Product();
-    }
-
     public function actionIndex()
     {   
-        
+        $category_obj = new Category();
+        $product_obj = new Product();
 
         $category = array();       
-        $category =  $this->category_obj->getCategoryList();
+        $category =  $category_obj->getCategoryList();
 
         $latestProducts = array();
-        $latestProducts = $this->product_obj->getLatestProducts(4);
-
+        $latestProducts = $product_obj->getLatestProducts(4);
 
         require_once(ROOT . '/views/site/index.php');
         

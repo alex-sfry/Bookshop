@@ -18,7 +18,6 @@ class Cart
         } else  $productsInCart[$id] = 1;
 
         $_SESSION['products'] = $productsInCart;
-        //echo '<pre>'; print_r( $_SESSION['products']);
 
         return $this->countItems();
     }
@@ -34,6 +33,5 @@ class Cart
 
             return $count;
         } else return 0;
-
     }
 }

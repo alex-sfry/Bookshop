@@ -4,7 +4,7 @@ use DBConnect\DBConnect;
 
 class User
 {
-    public function Register($name, $email, $password)
+    public function register($name, $email, $password)
     {
         $db = DBConnect::getConnection();
 
@@ -24,7 +24,7 @@ class User
         return $result->execute();
     }
 
-    public function Edit($id, $name, $password)
+    public function edit($id, $name, $password)
     {
         $db = DBConnect::getConnection();
 
