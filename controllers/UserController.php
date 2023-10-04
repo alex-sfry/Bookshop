@@ -5,7 +5,9 @@ use App\Model\User;
 class UserController
 {  
     public function actionLogin()
-    {
+    {   
+        $user_obj = new User();
+        
         $email = '';
         $password = '';
 
@@ -17,20 +19,20 @@ class UserController
             $email = $_POST['email'];
             $password = $_POST['password'];
 
-            if (!User::checkEmail($email)) {
+            if (!$user_obj->checkEmail($email)) {
                 $errors[] = 'Неправильный email';
             }
 
-            if (!User::checkPassword($password)) {
+            if (!$user_obj->checkPassword($password)) {
                 $errors[] = 'Пароль не должен быть короче 6-ти символов';
             }
 
-            $userId = User::checkUserData($email, $password);
+            $userId = $user_obj->checkUserData($email, $password);
 
             if ($userId == false) {
                 $errors[] = 'Неправильные данные для входа на сайт';
             } else {
-                User::auth($userId);
+                $user_obj->auth($userId);
                 header('Location: /account/');
             }
         }
@@ -41,7 +43,9 @@ class UserController
     }
 
     public function actionRegister()
-    {
+    {   
+        $user_obj = new User();
+
         $name = '';
         $email = '';
         $password = '';
@@ -55,24 +59,24 @@ class UserController
             $email = $_POST['email'];
             $password = $_POST['password'];
 
-            if (!User::checkName($name)) {
+            if (!$user_obj->checkName($name)) {
                 $errors[] = 'Имя не должно быть короче 4-х символов';
             }
 
-            if (!User::checkEmail($email)) {
+            if (!$user_obj->checkEmail($email)) {
                 $errors[] = 'Неправильный email';
             }
 
-            if (!User::checkPassword($password)) {
+            if (!$user_obj->checkPassword($password)) {
                 $errors[] = 'Пароль не должен быть короче 6-ти символов';
             }
 
-            if (User::checkEmailExist($email)) {
+            if ($user_obj->checkEmailExist($email)) {
                 $errors[] = 'Такой email уже используется';
             }
 
             if (count($errors) == 0) {
-                $result = User::register($name, $email, $password);
+                $result = $user_obj->register($name, $email, $password);
             }
         }
 

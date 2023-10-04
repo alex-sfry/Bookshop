@@ -3,7 +3,7 @@ namespace App\Cart;
 
 class Cart
 {
-    public static function addProduct($id)
+    public function addProduct($id)
     {   
         $id = intval($id);
 
@@ -20,7 +20,7 @@ class Cart
         $_SESSION['products'] = $productsInCart;
         //echo '<pre>'; print_r( $_SESSION['products']);
 
-        return self::countItems();
+        return $this->countItems();
     }
 
     public static function countItems()

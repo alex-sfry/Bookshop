@@ -9,8 +9,6 @@ namespace DBConnect;
 
 class DBConnect
 {
-    // static methods
-
     // get env variables
     private static function getEnvVars()
     {
@@ -71,6 +69,10 @@ class DBConnect
         );
     }
 
+    /**
+     * @param mixed $arr
+     * 
+     */
     public static function d($arr)
     {
         echo '<pre>';

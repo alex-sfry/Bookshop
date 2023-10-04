@@ -8,14 +8,17 @@ class BooksController
 {
     public function actionIndex($page = 1)
     {
-        $category = array();
+        $category_obj = new Category();
 
-        $category = Category::getCategoryList();
+        $category = array();
+        $category = $category_obj->getCategoryList();
+
+        $product_obj = new Product();
 
         $latestProducts = array();
-        $latestProducts = Product::getLatestProducts(8, $page);
-        $pages_count = Product::getLatestProductsPagesCount();
-        //$products_count = Product::getLatestProductsCount();
+        $latestProducts = $product_obj->getLatestProducts(8, $page);
+        $pages_count = $product_obj->getLatestProductsPagesCount();
+        //$products_count = $product_obj->getLatestProductsCount();
 
         $pagination = new Pagination ($pages_count, 1, 4, 'page-');
 
@@ -26,13 +29,16 @@ class BooksController
 
     public function actionCategory($categoryId, $page = 1)
     {
-        $category = array();
+        $category_obj = new Category();
 
-        $category = Category::getCategoryList();
+        $category = array();
+        $category = $category_obj->getCategoryList();
+
+        $product_obj = new Product();
 
         $categoryProducts = array();
-        $categoryProducts = Product::getProductsListByCategory($categoryId, $page);
-        $pages_count = Product::getProductsByCategoryPagesCount($categoryId);
+        $categoryProducts = $product_obj->getProductsListByCategory($categoryId, $page);
+        $pages_count = $product_obj->getProductsByCategoryPagesCount($categoryId);
 
         $pagination = new Pagination ($pages_count, 1, 4, 'page-');
 

@@ -22,6 +22,6 @@ return array (
     'account' => 'account/index',
     
     '(.+)' => 'site/PageNotFound', // 404
-    '' => 'site/index', // actionIndex in SiteConroll
+    '' => 'site/index', // actionIndex in SiteController
 
 );

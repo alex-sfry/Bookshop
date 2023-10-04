@@ -6,12 +6,13 @@ use App\Model\Product;
 class ProductController
 {
     public function actionView($productId)
-    {
+    {   
+        $category_obj = new Category();
+        $product_obj = new Product();
+
         $category = array();
-
-        $category = Category::getCategoryList();
-
-        $product = Product::getProductById($productId);
+        $category = $category_obj->getCategoryList();
+        $product = $product_obj->getProductById($productId);
 
         require_once(ROOT . '/views/product/view.php');
         

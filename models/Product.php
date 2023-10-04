@@ -6,7 +6,7 @@ class Product
 {
     const SHOW_BY_DEFAULT = 8;
 
-    public static function getLatestProducts($count = self::SHOW_BY_DEFAULT, $page = 1)
+    public function getLatestProducts($count = self::SHOW_BY_DEFAULT, $page = 1)
     {   
         $page = intval($page);
         $offset  = ($page - 1) * $count;
@@ -39,7 +39,7 @@ class Product
         return $productList;
     }
 
-    public static function getLatestProductsPagesCount($count_per_page = self::SHOW_BY_DEFAULT)
+    public function getLatestProductsPagesCount($count_per_page = self::SHOW_BY_DEFAULT)
     {
             $db = DBConnect::getConnection();
 
@@ -54,7 +54,7 @@ class Product
             return  $pages_count;
     }
 
-    public static function getProductsListByCategory($categoryId = false, $page = 1)
+    public function getProductsListByCategory($categoryId = false, $page = 1)
     {
         if ($categoryId) {
             $page = intval($page);
@@ -89,7 +89,7 @@ class Product
         }
     }
 
-    public static function getProductsByCategoryPagesCount($categoryId = false)
+    public function getProductsByCategoryPagesCount($categoryId = false)
     {
         if ($categoryId) {
             $db = DBConnect::getConnection();
@@ -107,7 +107,7 @@ class Product
         }
     }
 
-    public static function getProductById($id)
+    public function getProductById($id)
     {
         $id = intval($id);
 

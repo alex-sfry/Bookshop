@@ -4,7 +4,7 @@ use DBConnect\DBConnect;
 
 class Category
 {
-    public static function getCategoryList()
+    public function getCategoryList()
     {
         $db = DBConnect::getConnection();
 

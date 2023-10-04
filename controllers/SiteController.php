@@ -7,12 +7,16 @@ class SiteController
 {
     public function actionIndex()
     {   
-        $category = array();
-        
-        $category = Category::getCategoryList();
+        $category_obj = new Category();
+
+        $category = array();       
+        $category = $category_obj->getCategoryList();
+
+        $product_obj = new Product();
 
         $latestProducts = array();
-        $latestProducts = Product::getLatestProducts(4);
+        $latestProducts = $product_obj->getLatestProducts(4);
+
 
         require_once(ROOT . '/views/site/index.php');
         

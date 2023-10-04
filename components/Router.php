@@ -1,11 +1,25 @@
 <?php
 namespace Vic\Router;
 
+/**
+ * Class Router
+ */
+
 class Router
 {
+    /**
+     * @var array
+     */
     private $routes;
+
+    /**
+     * @var string
+     */
     private $namespace;
 
+    /**
+     * @param string $namespace
+     */
     public function __construct($namespace)
     {   
         $this->namespace = $namespace;
@@ -13,6 +27,9 @@ class Router
         $this->routes = include($routesPath);
     }
 
+    /**
+     * @return string
+     */
     private function getURI()
     {
         if (!empty($_SERVER['REQUEST_URI'])) {
@@ -20,6 +37,9 @@ class Router
         }
     }
 
+    /**
+     * @return void
+     */
     public function run()
     {
         $uri = $this->getURI();

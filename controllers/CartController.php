@@ -5,16 +5,20 @@ use App\Cart\Cart;
 class CartController
 {
     public function actionAdd($id)
-    {
-        Cart::addProduct($id);
+    {   
+        $cart_obj = new Cart();
+
+        $cart_obj->addProduct($id);
 
         $referer = $_SERVER['HTTP_REFERER'];
         header("Location: $referer");
     }
 
     public function actionAddAjax($id)
-    {   
-        echo json_encode(Cart::addProduct($id));
+    {           
+        $cart_obj = new Cart();
+
+        echo json_encode($cart_obj->addProduct($id));
 
         return true;
     }
@@ -26,8 +30,11 @@ class CartController
             return true;
         }
         echo '<pre>'; print_r( $_SESSION['products']);
+
+        // $category_obj = new Category();
+        
         // $categories = array();
-        // $categories = Category::getCategoryList();
+        // $categories = $category_obj->getCategoryList();
 
         // $productsInCart =false;
 

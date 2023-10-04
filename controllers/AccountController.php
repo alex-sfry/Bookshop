@@ -5,10 +5,11 @@ use App\Model\User;
 class AccountController
 {
     public function actionIndex()
-    {
-        $userId = User::checkLogged();
+    {   
+        $user_obj = new User();
 
-        $user = User::getUserById($userId);
+        $userId = $user_obj->checkLogged();
+        $user = $user_obj->getUserById($userId);
 
         require_once(ROOT . '/views/account/index.php');
 
@@ -17,8 +18,10 @@ class AccountController
 
     public function actionEdit()
     {   
-        $userId = User::checkLogged();
-        $user = User::getUserById($userId);
+        $user_obj = new User();
+
+        $userId =$user_obj->checkLogged();
+        $user = $user_obj->getUserById($userId);
 
         $name = $user['name'];
         $password = $user['password'];
@@ -31,16 +34,16 @@ class AccountController
             $name = $_POST['name'];
             $password = $_POST['password'];
 
-            if (!User::checkName($name)) {
+            if (!$user_obj->checkName($name)) {
                 $errors[] = 'Имя не должно быть короче 4-х символов';
             }
 
-            if (!User::checkPassword($password)) {
+            if (!$user_obj->checkPassword($password)) {
                 $errors[] = 'Пароль не должен быть короче 6-ти символов';
             }
 
             if (count($errors) == 0) {
-                $result = User::edit($userId, $name, $password);
+                $result =$user_obj->Edit($userId, $name, $password);
             }
         }
 
