@@ -3,11 +3,16 @@ namespace App\Core;
 use App\Model\User;
 
 class UserController
-{  
+{   
+    private $user_obj;
+    
+    public function __construct()
+    {   
+        $this->user_obj = new User();
+    }
+
     public function actionLogin()
     {   
-        $user_obj = new User();
-        
         $email = '';
         $password = '';
 
@@ -19,20 +24,20 @@ class UserController
             $email = $_POST['email'];
             $password = $_POST['password'];
 
-            if (!$user_obj->checkEmail($email)) {
+            if (!$this->user_obj->checkEmail($email)) {
                 $errors[] = 'Неправильный email';
             }
 
-            if (!$user_obj->checkPassword($password)) {
+            if (!$this->user_obj->checkPassword($password)) {
                 $errors[] = 'Пароль не должен быть короче 6-ти символов';
             }
 
-            $userId = $user_obj->checkUserData($email, $password);
+            $userId = $this->user_obj->checkUserData($email, $password);
 
             if ($userId == false) {
                 $errors[] = 'Неправильные данные для входа на сайт';
             } else {
-                $user_obj->auth($userId);
+                $this->user_obj->auth($userId);
                 header('Location: /account/');
             }
         }
@@ -44,8 +49,6 @@ class UserController
 
     public function actionRegister()
     {   
-        $user_obj = new User();
-
         $name = '';
         $email = '';
         $password = '';
@@ -59,24 +62,24 @@ class UserController
             $email = $_POST['email'];
             $password = $_POST['password'];
 
-            if (!$user_obj->checkName($name)) {
+            if (!$this->user_obj->checkName($name)) {
                 $errors[] = 'Имя не должно быть короче 4-х символов';
             }
 
-            if (!$user_obj->checkEmail($email)) {
+            if (!$this->user_obj->checkEmail($email)) {
                 $errors[] = 'Неправильный email';
             }
 
-            if (!$user_obj->checkPassword($password)) {
+            if (!$this->user_obj->checkPassword($password)) {
                 $errors[] = 'Пароль не должен быть короче 6-ти символов';
             }
 
-            if ($user_obj->checkEmailExist($email)) {
+            if ($this->user_obj->checkEmailExist($email)) {
                 $errors[] = 'Такой email уже используется';
             }
 
             if (count($errors) == 0) {
-                $result = $user_obj->register($name, $email, $password);
+                $result = $this->user_obj->register($name, $email, $password);
             }
         }
 

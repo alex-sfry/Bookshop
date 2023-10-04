@@ -5,20 +5,25 @@ use App\Model\Product;
 use App\cPag\Pagination;
 
 class BooksController
-{
+{   
+    private $category_obj;
+    private $product_obj;
+    
+    public function __construct()
+    {   
+        $this->category_obj = new Category();
+        $this->product_obj = new Product();
+    }
+
     public function actionIndex($page = 1)
     {
-        $category_obj = new Category();
-
         $category = array();
-        $category = $category_obj->getCategoryList();
-
-        $product_obj = new Product();
+        $category =  $this->category_obj->getCategoryList();
 
         $latestProducts = array();
-        $latestProducts = $product_obj->getLatestProducts(8, $page);
-        $pages_count = $product_obj->getLatestProductsPagesCount();
-        //$products_count = $product_obj->getLatestProductsCount();
+        $latestProducts = $this->product_obj->getLatestProducts(8, $page);
+        $pages_count =$this->product_obj->getLatestProductsPagesCount();
+        //$products_count = $this->product_obj->getLatestProductsCount();
 
         $pagination = new Pagination ($pages_count, 1, 4, 'page-');
 
@@ -29,16 +34,12 @@ class BooksController
 
     public function actionCategory($categoryId, $page = 1)
     {
-        $category_obj = new Category();
-
         $category = array();
-        $category = $category_obj->getCategoryList();
-
-        $product_obj = new Product();
+        $category =  $this->category_obj->getCategoryList();
 
         $categoryProducts = array();
-        $categoryProducts = $product_obj->getProductsListByCategory($categoryId, $page);
-        $pages_count = $product_obj->getProductsByCategoryPagesCount($categoryId);
+        $categoryProducts = $this->product_obj->getProductsListByCategory($categoryId, $page);
+        $pages_count = $this->product_obj->getProductsByCategoryPagesCount($categoryId);
 
         $pagination = new Pagination ($pages_count, 1, 4, 'page-');
 

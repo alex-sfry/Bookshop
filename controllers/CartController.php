@@ -3,12 +3,17 @@ namespace App\Core;
 use App\Cart\Cart;
 
 class CartController
-{
+{   
+    private $cart_obj;
+    
+    public function __construct()
+    {   
+        $this->cart_obj = new Cart();
+    }
+
     public function actionAdd($id)
     {   
-        $cart_obj = new Cart();
-
-        $cart_obj->addProduct($id);
+        $this->cart_obj->addProduct($id);
 
         $referer = $_SERVER['HTTP_REFERER'];
         header("Location: $referer");
@@ -16,9 +21,7 @@ class CartController
 
     public function actionAddAjax($id)
     {           
-        $cart_obj = new Cart();
-
-        echo json_encode($cart_obj->addProduct($id));
+        echo json_encode( $this->cart_obj->addProduct($id));
 
         return true;
     }
