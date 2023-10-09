@@ -1,26 +1,40 @@
 <?php
-namespace App\Core;
-use App\Model\User;
 
-class AccountController
+namespace App\Core;
+
+use App\Model\User;
+use App\Cart\Cart;
+
+class AccountController extends Controller
 {
     public function actionIndex()
-    {   
+    {
         $user_obj = new User();
 
         $userId = $user_obj->checkLogged();
-        $user = $user_obj->getUserById($userId);
 
-        require_once(ROOT . '/views/account/index.php');
+        $data = [
+            'vars' => [
+                'user' => $user_obj->getUserById($userId)
+            ],
+            'objects' => [
+                'cart' => new Cart(),
+            ]
+        ];
+
+        $view = ROOT . '/views/account/index.php';
+        $title = 'Bookshop';
+
+        $this->render($view, $data, $title);
 
         return true;
     }
 
     public function actionEdit()
-    {   
+    {
         $user_obj = new User();
 
-        $userId =$user_obj->checkLogged();
+        $userId = $user_obj->checkLogged();
         $user = $user_obj->getUserById($userId);
 
         $name = $user['name'];
@@ -29,7 +43,7 @@ class AccountController
         $errors = array();
 
         $result = false;
-        
+
         if (isset($_POST['submit'])) {
             $name = $_POST['name'];
             $password = $_POST['password'];
@@ -43,12 +57,29 @@ class AccountController
             }
 
             if (count($errors) == 0) {
-                $result =$user_obj->edit($userId, $name, $password);
+                $result = $user_obj->edit($userId, $name, $password);
             }
         }
 
-        require_once(ROOT . '/views/account/edit.php');
-        
+        $data = [
+            'vars' => [
+                'user' => $user_obj->getUserById($userId),
+                'name' => $name,
+                'password' => $password,
+                'errors' => $errors,
+                'result' => $result
+            ],
+            'objects' => [
+                'cart' => new Cart(),
+            ]
+        ];
+
+        $view = ROOT . '/views/account/edit.php';
+        $title = 'Bookshop';
+
+        $this->render($view, $data, $title);
+
+
         return true;
     }
 }

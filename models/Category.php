@@ -5,14 +5,18 @@ use DBConnect\DBConnect;
 class Category
 {
     public function getCategoryList()
-    {
-        $db = DBConnect::getConnection();
+    {   
+        $db = new DBConnect();
+        $conn = $db->getConnection();
 
-        $categoryList = array();
+        $categoryList = array();       
 
-        $result = $db->query('SELECT id, `name`
-                              FROM categories
-                              ORDER BY sort_order ASC;');
+        $sql = 'SELECT id, `name`
+                FROM categories
+                ORDER BY sort_order ASC;';
+
+        $result = $conn->prepare($sql);
+        $result->execute();
         
         $i = 0;
 

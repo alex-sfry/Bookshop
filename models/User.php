@@ -6,7 +6,8 @@ class User
 {
     public function register($name, $email, $password)
     {
-        $db = DBConnect::getConnection();
+        $db = new DBConnect();
+        $conn = $db->getConnection();
 
         $name = htmlspecialchars($name);
         $email = htmlspecialchars($email);
@@ -16,7 +17,7 @@ class User
         $sql = 'INSERT INTO user (name, email, password)
                 VALUES (:name, :email, :password)';
 
-        $result = $db->prepare($sql);
+        $result = $conn->prepare($sql);
         $result->bindParam(':name', $name, \PDO::PARAM_STR);
         $result->bindParam(':email', $email, \PDO::PARAM_STR);
         $result->bindParam(':password', $password, \PDO::PARAM_STR);
@@ -26,7 +27,8 @@ class User
 
     public function edit($id, $name, $password)
     {
-        $db = DBConnect::getConnection();
+        $db = new DBConnect();
+        $conn = $db->getConnection();
 
         $id = htmlspecialchars($id);
         $name = htmlspecialchars($name);
@@ -36,7 +38,7 @@ class User
                 SET `name` = :name, `password` = :password
                 WHERE id = :id';
 
-        $result = $db->prepare($sql);
+        $result = $conn->prepare($sql);
         $result->bindParam(':id', $id, \PDO::PARAM_INT);
         $result->bindParam(':name', $name, \PDO::PARAM_STR);
         $result->bindParam(':password', $password, \PDO::PARAM_STR);
@@ -46,7 +48,8 @@ class User
 
     public function checkUserData($email, $password)
     {
-        $db = DBConnect::getConnection();
+        $db = new DBConnect();
+        $conn = $db->getConnection();
 
         $email = htmlspecialchars($email);
         $password = htmlspecialchars($password);
@@ -56,7 +59,7 @@ class User
                 WHERE email = :email
                 ';
 
-        $result = $db->prepare($sql);
+        $result = $conn->prepare($sql);
         $result->bindParam(':email', $email, \PDO::PARAM_STR);
         $result->execute();
 
@@ -112,13 +115,14 @@ class User
 
     public function checkEmailExist($email) 
     {
-        $db = DBConnect::getConnection();
+        $db = new DBConnect();
+        $conn = $db->getConnection();
 
         $sql = 'SELECT COUNT(*)
                 FROM user
                 WHERE email = :email';
 
-        $result = $db->prepare($sql);
+        $result = $conn->prepare($sql);
         $result->bindParam(':email', $email, \PDO::PARAM_STR);
 
         $result->execute();
@@ -130,13 +134,14 @@ class User
 
     public function getUserById($id) 
     {
-        $db = DBConnect::getConnection();
+        $db = new DBConnect();
+        $conn = $db->getConnection();
 
         $sql = 'SELECT *
                 FROM user
                 WHERE id = :id';
 
-        $result = $db->prepare($sql);
+        $result = $conn->prepare($sql);
         $result->bindParam(':id', $id, \PDO::PARAM_INT);
 
         $result->execute();

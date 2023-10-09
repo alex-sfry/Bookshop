@@ -1,29 +1,35 @@
 <?php
+
 namespace App\Model;
+
 use DBConnect\DBConnect;
 
 class Product
-{
+{   
     const SHOW_BY_DEFAULT = 8;
 
     public function getLatestProducts($count = self::SHOW_BY_DEFAULT, $page = 1)
     {   
+        $db = new DBConnect();
+        $conn = $db->getConnection();
+
         $page = intval($page);
         $offset  = ($page - 1) * $count;
-        
-        $count = intval($count);
 
-        $db = DBConnect::getConnection();
+        $count = intval($count);
 
         $productList = array();
 
-        $result = $db->query('SELECT books.id AS id, author_id, `name`, price, `image`, isNew, authors.id AS a_id, author
-                              FROM books, authors
-                              WHERE status = "1"
-                              AND author_id = authors.id
-                              ORDER BY books.id DESC
-                              LIMIT ' . $count . ' OFFSET ' . $offset);
-                                
+        $sql = 'SELECT books.id AS id, author_id, `name`, price, `image`, isNew, authors.id AS a_id, author
+                FROM books, authors
+                WHERE status = "1"
+                AND author_id = authors.id
+                ORDER BY books.id DESC
+                LIMIT ' . $count . ' OFFSET ' . $offset;
+
+        $result = $conn->prepare($sql);
+        $result->execute();
+
         $i = 0;
 
         while ($row = $result->fetch()) {
@@ -35,41 +41,49 @@ class Product
             $productList[$i]['isNew'] = $row['isNew'];
             $i++;
         }
-        
+
         return $productList;
     }
 
     public function getLatestProductsPagesCount($count_per_page = self::SHOW_BY_DEFAULT)
     {
-            $db = DBConnect::getConnection();
+        $db = new DBConnect();
+        $conn = $db->getConnection();
 
-            $result = $db->query("SELECT COUNT(*) AS rows_qty
-                                FROM books");
+        $sql = "SELECT COUNT(*) AS rows_qty
+                FROM books";
 
-            $count = $result->fetchColumn();
-            $pages_count = $count / $count_per_page;
+        $result = $conn->prepare($sql);
+        $result->execute();
 
-            return  $pages_count;
+        $count = $result->fetchColumn();
+        $pages_count = $count / $count_per_page;
+
+        return  $pages_count;
     }
 
     public function getProductsListByCategory($categoryId = false, $page = 1)
     {
         if ($categoryId) {
+            $db = new DBConnect();
+            $conn = $db->getConnection();
+
             $page = intval($page);
             $offset  = ($page - 1) * self::SHOW_BY_DEFAULT;
 
-            $db = DBConnect::getConnection();
-
             $products = array();
 
-            $result = $result = $db->query("SELECT books.id AS id, author_id, `name`, price, `image`, isNew, authors.id AS a_id, author
-                                            FROM books, authors
-                                            WHERE status = '1'
-                                            AND author_id = authors.id
-                                            AND category_id = '$categoryId'
-                                            ORDER BY books.id DESC
-                                            LIMIT " . self::SHOW_BY_DEFAULT
-                                            . " OFFSET " . $offset);
+            $sql = "SELECT books.id AS id, author_id, `name`, price, `image`, isNew, authors.id AS a_id, author
+                    FROM books, authors
+                    WHERE status = '1'
+                    AND author_id = authors.id
+                    AND category_id = '$categoryId'
+                    ORDER BY books.id DESC
+                    LIMIT " . self::SHOW_BY_DEFAULT
+                    . " OFFSET " . $offset;
+            
+            $result = $conn->prepare($sql);
+            $result->execute();
 
             $i = 0;
 
@@ -90,11 +104,15 @@ class Product
     public function getProductsByCategoryPagesCount($categoryId = false)
     {
         if ($categoryId) {
-            $db = DBConnect::getConnection();
+            $db = new DBConnect();
+            $conn = $db->getConnection();
 
-            $result = $db->query("SELECT COUNT(*) AS rows_qty
-                                            FROM books
-                                            WHERE category_id = '$categoryId'");
+            $sql = "SELECT COUNT(*) AS rows_qty
+                    FROM books
+                    WHERE category_id = '$categoryId'";
+
+            $result = $conn->prepare($sql);
+            $result->execute();
 
             $count = $result->fetchColumn();
             $pages_count = $count / self::SHOW_BY_DEFAULT;
@@ -108,15 +126,18 @@ class Product
         $id = intval($id);
 
         if ($id) {
-            $db = DBConnect::getConnection();
+            $db = new DBConnect();
+            $conn = $db->getConnection();
 
-            $result = $db->query("SELECT *
-                                  FROM books, authors
-                                  WHERE books.id = '$id'
-                                  AND books.author_id = authors.id");
+            $sql = "SELECT *
+                    FROM books, authors
+                    WHERE books.id = '$id'
+                    AND books.author_id = authors.id";
+
+            $result = $conn->prepare($sql);
+            $result->execute();
 
             return $result->fetch();
         }
     }
-
 }

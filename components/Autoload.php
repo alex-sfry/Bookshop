@@ -8,7 +8,8 @@ function classAutoloader($class_name)
     // List all the class directories in the array.
     $array_paths = array(
         '/models/',
-        '/components/'
+        '/components/',
+        '/controllers/'
     );
 
     foreach ($array_paths as $path) {

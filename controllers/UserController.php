@@ -1,11 +1,14 @@
 <?php
-namespace App\Core;
-use App\Model\User;
 
-class UserController
-{   
+namespace App\Core;
+
+use App\Model\User;
+use App\Cart\Cart;
+
+class UserController extends Controller
+{
     public function actionLogin()
-    {   
+    {
         $user_obj = new User();
 
         $email = '';
@@ -23,10 +26,6 @@ class UserController
                 $errors[] = 'Неправильный email';
             }
 
-            if (!$user_obj->checkPassword($password)) {
-                $errors[] = 'Пароль не должен быть короче 6-ти символов';
-            }
-
             $userId = $user_obj->checkUserData($email, $password);
 
             if ($userId == false) {
@@ -37,13 +36,28 @@ class UserController
             }
         }
 
-        require_once(ROOT . '/views/user/login.php');
+        $data = [
+            'vars' => [
+                'email' => $email,
+                'password' =>$password,
+                'errors' => $errors,
+                'result' => $result
+            ],
+            'objects' => [
+                'cart' => new Cart(),
+            ]
+        ];
+
+        $view = ROOT . '/views/user/login.php';
+        $title = 'Bookshop';
+
+        $this->render($view, $data, $title);
 
         return true;
     }
 
     public function actionRegister()
-    {   
+    {
         $user_obj = new User();
 
         $name = '';
@@ -53,7 +67,7 @@ class UserController
         $errors = array();
 
         $result = false;
-        
+
         if (isset($_POST['submit'])) {
             $name = $_POST['name'];
             $email = $_POST['email'];
@@ -80,10 +94,27 @@ class UserController
             }
         }
 
-        require_once(ROOT . '/views/user/register.php');
+        $data = [
+            'vars' => [
+                'name' => $name,
+                'email' => $email,
+                'password' => $password,
+                'errors' => $errors,
+                'result' => $result
+            ],
+            'objects' => [
+                'cart' => new Cart(),
+            ]
+        ];
+
+        $view = ROOT . '/views/user/register.php';
+        $title = 'Bookshop';
+
+        $this->render($view, $data, $title);
 
         return true;
     }
+
     public function actionLogout()
     {
         session_start();

@@ -1,31 +1,40 @@
 <?php
+
 namespace App\Core;
+
 use App\Model\Category;
 use App\Model\Product;
+use App\Cart\Cart;
 
-
-class SiteController
-{   
+class SiteController extends Controller
+{
     public function actionIndex()
-    {   
+    {
         $category_obj = new Category();
         $product_obj = new Product();
 
-        $category = array();       
-        $category =  $category_obj->getCategoryList();
+        $data = [
+            'vars' => [
+                'category' => $category_obj->getCategoryList(),
+                'latestProducts' => $product_obj->getLatestProducts(4)
+            ],
+            'objects' => [
+            'cart' => new Cart()
+            ]
+        ];
 
-        $latestProducts = array();
-        $latestProducts = $product_obj->getLatestProducts(4);
+        $view = ROOT . '/views/site/index.php';
+        $title = 'Bookshop';
 
-        require_once(ROOT . '/views/site/index.php');
-        
+        $this->render($view, $data, $title);
+
         return true;
     }
 
     public function actionPageNotFound()
-    {   
+    {
         require_once(ROOT . '/views/404/404.php');
-        
+
         return true;
     }
 }

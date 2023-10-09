@@ -1,25 +1,25 @@
 <?php
-namespace DBConnect;
 
+namespace DBConnect;
 
 /**
  * Class DBConnect
  * connect to DB
  */
-  
+
 class DBConnect
 {
     // get DSN string
-    private static function getDSN()
-    {   
+    private function getDSN()
+    {
         return "mysql:dbname=" . DB_NAME . ";host=" . DB_HOST;
     }
 
     //get DB connection object
-    public static function getConnection()
+    public function getConnection()
     {
         return new \PDO(
-            self::getDSN(),
+            $this->getDSN(),
             DB_LOGIN,
             DB_PASSWORD,
             [
