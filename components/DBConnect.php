@@ -6,16 +6,23 @@ namespace DBConnect;
  * Class DBConnect
  * connect to DB
  */
-
 class DBConnect
 {
-    // get DSN string
+    /**
+     * get DSN string
+     *
+     * @return string
+     */
     private function getDSN()
     {
         return "mysql:dbname=" . DB_NAME . ";host=" . DB_HOST;
     }
 
-    //get DB connection object
+    /**
+     * get DB connection object
+     *
+     * @return object
+     */
     public function getConnection()
     {
         return new \PDO(
@@ -27,16 +34,5 @@ class DBConnect
                 \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
             ]
         );
-    }
-
-    /**
-     * @param mixed $arr
-     * 
-     */
-    public static function d($arr)
-    {
-        echo '<pre>';
-        print_r($arr);
-        echo '</pre>';
     }
 }

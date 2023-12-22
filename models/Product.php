@@ -4,12 +4,21 @@ namespace App\Model;
 
 use DBConnect\DBConnect;
 
+/**
+ * [class Product]
+ */
 class Product
-{   
-    const SHOW_BY_DEFAULT = 8;
+{
+    private const SHOW_BY_DEFAULT = 8;
 
-    public function getLatestProducts($count = self::SHOW_BY_DEFAULT, $page = 1)
-    {   
+    /**
+     * @param int $count
+     * @param int $page
+     *
+     * @return array
+     */
+    public function getLatestProducts(int $count = self::SHOW_BY_DEFAULT, int $page = 1): array
+    {
         $db = new DBConnect();
         $conn = $db->getConnection();
 
@@ -45,7 +54,12 @@ class Product
         return $productList;
     }
 
-    public function getLatestProductsPagesCount($count_per_page = self::SHOW_BY_DEFAULT)
+    /**
+     * @param int $count_per_page
+     *
+     * @return int
+     */
+    public function getLatestProductsPagesCount(int $count_per_page = self::SHOW_BY_DEFAULT): float
     {
         $db = new DBConnect();
         $conn = $db->getConnection();
@@ -62,7 +76,13 @@ class Product
         return  $pages_count;
     }
 
-    public function getProductsListByCategory($categoryId = false, $page = 1)
+    /**
+     * @param mixed int
+     * @param int $page
+     *
+     * @return array
+     */
+    public function getProductsListByCategory(int | bool $categoryId = false, int $page = 1): array
     {
         if ($categoryId) {
             $db = new DBConnect();
@@ -81,7 +101,7 @@ class Product
                     ORDER BY books.id DESC
                     LIMIT " . self::SHOW_BY_DEFAULT
                     . " OFFSET " . $offset;
-            
+
             $result = $conn->prepare($sql);
             $result->execute();
 
@@ -101,7 +121,12 @@ class Product
         }
     }
 
-    public function getProductsByCategoryPagesCount($categoryId = false)
+    /**
+     * @param mixed int
+     *
+     * @return int
+     */
+    public function getProductsByCategoryPagesCount(int | bool $categoryId = false): float
     {
         if ($categoryId) {
             $db = new DBConnect();
@@ -121,7 +146,12 @@ class Product
         }
     }
 
-    public function getProductById($id)
+    /**
+     * @param int $id
+     *
+     * @return mixed
+     */
+    public function getProductById(int $id): mixed
     {
         $id = intval($id);
 

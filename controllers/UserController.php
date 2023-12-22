@@ -5,9 +5,15 @@ namespace App\Core;
 use App\Model\User;
 use App\Cart\Cart;
 
+/**
+ * [Class UserController]
+ */
 class UserController extends Controller
 {
-    public function actionLogin()
+    /**
+     * @return bool
+     */
+    public function actionLogin(): bool
     {
         $user_obj = new User();
 
@@ -39,7 +45,7 @@ class UserController extends Controller
         $data = [
             'vars' => [
                 'email' => $email,
-                'password' =>$password,
+                'password' => $password,
                 'errors' => $errors,
                 'result' => $result
             ],
@@ -56,7 +62,10 @@ class UserController extends Controller
         return true;
     }
 
-    public function actionRegister()
+    /**
+     * @return bool
+     */
+    public function actionRegister(): bool
     {
         $user_obj = new User();
 
@@ -115,7 +124,10 @@ class UserController extends Controller
         return true;
     }
 
-    public function actionLogout()
+    /**
+     * @return void
+     */
+    public function actionLogout(): void
     {
         session_start();
         unset($_SESSION['user']);

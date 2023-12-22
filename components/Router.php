@@ -1,27 +1,27 @@
 <?php
+
 namespace Vic\Router;
 
 /**
  * Class Router
  */
-
 class Router
 {
     /**
      * @var array
      */
-    private $routes;
+    private array $routes;
 
     /**
      * @var string
      */
-    private $namespace;
+    private string $namespace;
 
     /**
      * @param string $namespace
      */
-    public function __construct($namespace)
-    {   
+    public function __construct(string $namespace)
+    {
         $this->namespace = $namespace;
         $routesPath = ROOT . '/config/routes.php';
         $this->routes = include($routesPath);
@@ -30,7 +30,7 @@ class Router
     /**
      * @return string
      */
-    private function getURI()
+    private function getURI(): string
     {
         if (!empty($_SERVER['REQUEST_URI'])) {
             return trim($_SERVER['REQUEST_URI'], '/');
@@ -40,10 +40,10 @@ class Router
     /**
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $uri = $this->getURI();
-        
+
         foreach ($this->routes as $uriPattern => $path) {
             if (preg_match("~^$uriPattern$~", $uri)) {
                 $internalRoute = preg_replace("~^$uriPattern$~", $path, $uri);
@@ -64,9 +64,9 @@ class Router
 
                 $obj_name = '\\' . $this->namespace . '\\' . $controllerName;
 
-                $controllerObject = new $obj_name;
+                $controllerObject = new $obj_name();
                 $result = call_user_func_array(array($controllerObject, $actionName), $parameters);
-                
+
                 if ($result != null) {
                     break;
                 }

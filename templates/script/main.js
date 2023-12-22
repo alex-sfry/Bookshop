@@ -4,7 +4,9 @@ if (backBtn) backBtn.addEventListener('click', () => history.back());
 
 // add to cart 
 const toCart = document.querySelectorAll('.add-to-cart');
-if (toCart) toCart.forEach(item => item.addEventListener('click', handleAddToCart))
+if (toCart) {
+    toCart.forEach(item => item.addEventListener('click', handleAddToCart))
+}
 
 async function handleAddToCart(e) {
     const id = e.target.getAttribute('data-id');

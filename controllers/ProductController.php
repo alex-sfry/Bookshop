@@ -6,9 +6,17 @@ use App\Model\Category;
 use App\Model\Product;
 use App\Cart\Cart;
 
+/**
+ * [Class ProductController]
+ */
 class ProductController extends Controller
 {
-    public function actionView($productId)
+    /**
+     * @param int $productId
+     *
+     * @return bool
+     */
+    public function actionView(int $productId): bool
     {
         $category_obj = new Category();
         $product_obj = new Product();

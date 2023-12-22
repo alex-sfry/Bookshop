@@ -5,9 +5,15 @@ namespace App\Core;
 use App\Model\User;
 use App\Cart\Cart;
 
+/**
+ * [class AccountController]
+ */
 class AccountController extends Controller
 {
-    public function actionIndex()
+    /**
+     * @return bool
+     */
+    public function actionIndex(): bool
     {
         $user_obj = new User();
 
@@ -30,7 +36,10 @@ class AccountController extends Controller
         return true;
     }
 
-    public function actionEdit()
+    /**
+     * @return bool
+     */
+    public function actionEdit(): bool
     {
         $user_obj = new User();
 

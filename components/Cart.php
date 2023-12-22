@@ -1,10 +1,19 @@
 <?php
+
 namespace App\Cart;
 
+/**
+ * [Class Cart]
+ */
 class Cart
 {
-    public function addProduct($id)
-    {   
+    /**
+     * @param int $id
+     *
+     * @return int
+     */
+    public function addProduct(int $id): int
+    {
         $id = intval($id);
 
         $productsInCart = array();
@@ -15,14 +24,19 @@ class Cart
 
         if (array_key_exists($id, $productsInCart)) {
             $productsInCart[$id]++;
-        } else  $productsInCart[$id] = 1;
+        } else {
+            $productsInCart[$id] = 1;
+        }
 
         $_SESSION['products'] = $productsInCart;
 
         return $this->countItems();
     }
 
-    public static function countItems()
+    /**
+     * @return int
+     */
+    public static function countItems(): int
     {
         if (isset($_SESSION['products'])) {
             $count = 0;
@@ -32,6 +46,8 @@ class Cart
             }
 
             return $count;
-        } else return 0;
+        } else {
+            return 0;
+        }
     }
 }

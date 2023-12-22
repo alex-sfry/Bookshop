@@ -1,10 +1,15 @@
 <?php
 
-function classAutoloader($class_name)
-{   
+/**
+ * @param string $class_name
+ *
+ * @return void
+ */
+function classAutoloader(string $class_name): void
+{
     $name_arr = explode('\\', $class_name);
     $class_name = $name_arr[count($name_arr)  - 1];
-    
+
     // List all the class directories in the array.
     $array_paths = array(
         '/models/',

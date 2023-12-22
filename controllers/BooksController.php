@@ -7,9 +7,17 @@ use App\Model\Product;
 use App\cPag\Pagination;
 use App\Cart\Cart;
 
+/**
+ * [class BooksController]
+ */
 class BooksController extends Controller
 {
-    public function actionIndex($page = 1)
+    /**
+     * @param int $page
+     *
+     * @return bool
+     */
+    public function actionIndex(int $page = 1): bool
     {
         $category_obj = new Category();
         $product_obj = new Product();
@@ -36,7 +44,13 @@ class BooksController extends Controller
         return true;
     }
 
-    public function actionCategory($categoryId, $page = 1)
+    /**
+     * @param int $categoryId
+     * @param int $page
+     *
+     * @return bool
+     */
+    public function actionCategory(int $categoryId, int $page = 1): bool
     {
         $category_obj = new Category();
         $product_obj = new Product();

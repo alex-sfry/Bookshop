@@ -6,9 +6,15 @@ use App\Model\Category;
 use App\Model\Product;
 use App\Cart\Cart;
 
+/**
+ * [class SiteController]
+ */
 class SiteController extends Controller
 {
-    public function actionIndex()
+    /**
+     * @return bool
+     */
+    public function actionIndex(): bool
     {
         $category_obj = new Category();
         $product_obj = new Product();
@@ -31,7 +37,10 @@ class SiteController extends Controller
         return true;
     }
 
-    public function actionPageNotFound()
+    /**
+     * @return bool
+     */
+    public function actionPageNotFound(): bool
     {
         require_once(ROOT . '/views/404/404.php');
 

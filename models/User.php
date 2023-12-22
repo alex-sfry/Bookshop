@@ -1,10 +1,22 @@
 <?php
+
 namespace App\Model;
+
 use DBConnect\DBConnect;
 
+/**
+ * [class User]
+ */
 class User
 {
-    public function register($name, $email, $password)
+    /**
+     * @param string $name
+     * @param string $email
+     * @param string $password
+     *
+     * @return bool
+     */
+    public function register(string $name, string $email, string $password): bool
     {
         $db = new DBConnect();
         $conn = $db->getConnection();
@@ -25,7 +37,14 @@ class User
         return $result->execute();
     }
 
-    public function edit($id, $name, $password)
+    /**
+     * @param int $id
+     * @param string $name
+     * @param string $password
+     *
+     * @return bool
+     */
+    public function edit(int $id, string $name, string $password): bool
     {
         $db = new DBConnect();
         $conn = $db->getConnection();
@@ -46,7 +65,14 @@ class User
         return $result->execute();
     }
 
-    public function checkUserData($email, $password)
+    /**
+     * @param string $email
+     * @param string $password
+     *
+     * @return int
+     * @return bool
+     */
+    public function checkUserData(string $email, string $password): int | bool
     {
         $db = new DBConnect();
         $conn = $db->getConnection();
@@ -67,15 +93,25 @@ class User
 
         if ($user && password_verify($password, $user['password'])) {
             return $user['id'];
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
-    public function auth($userId)
+    /**
+     * @param int $userId
+     *
+     * @return void
+     */
+    public function auth(int $userId): void
     {
-        $_SESSION['user'] = $userId;    
+        $_SESSION['user'] = $userId;
     }
 
-    public function checkLogged()
+    /**
+     * @return int
+     */
+    public function checkLogged(): int
     {
         if (isset($_SESSION['user'])) {
             return $_SESSION['user'];
@@ -84,36 +120,67 @@ class User
         header("Location: /user/login");
     }
 
-    public static function isGuest()
+    /**
+     * @return bool
+     */
+    public static function isGuest(): bool
     {
         if (isset($_SESSION['user'])) {
             return false;
-        } else return true;
-    }
-
-
-    public function checkName($name)
-    {
-        if (strlen($name) >=4) {
+        } else {
             return true;
-        } else return false;
+        }
     }
 
-    public function checkEmail($email)
+
+    /**
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function checkName(string $name): bool
+    {
+        if (strlen($name) >= 4) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @param string $email
+     *
+     * @return bool
+     */
+    public function checkEmail(string $email): bool
     {
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
-    public function checkPassword($password)
+    /**
+     * @param string $password
+     *
+     * @return bool
+     */
+    public function checkPassword(string $password): bool
     {
-        if (strlen($password) >=6) {
+        if (strlen($password) >= 6) {
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
-    public function checkEmailExist($email) 
+    /**
+     * @param string $email
+     *
+     * @return bool
+     */
+    public function checkEmailExist(string $email): bool
     {
         $db = new DBConnect();
         $conn = $db->getConnection();
@@ -127,12 +194,19 @@ class User
 
         $result->execute();
 
-        if($result->fetchColumn()) {
+        if ($result->fetchColumn()) {
             return true;
-        } else return false;
+        } else {
+            return false;
+        }
     }
 
-    public function getUserById($id) 
+    /**
+     * @param int $id
+     *
+     * @return bool
+     */
+    public function getUserById(int $id): bool
     {
         $db = new DBConnect();
         $conn = $db->getConnection();

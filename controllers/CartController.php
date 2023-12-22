@@ -4,9 +4,17 @@ namespace App\Core;
 
 use App\Cart\Cart;
 
+/**
+ * [class CartController]
+ */
 class CartController
 {
-    public function actionAdd($id)
+    /**
+     * @param int $id
+     *
+     * @return void
+     */
+    public function actionAdd(int $id): void
     {
         $cart_obj = new Cart();
 
@@ -16,7 +24,12 @@ class CartController
         header("Location: $referer");
     }
 
-    public function actionAddAjax($id)
+    /**
+     * @param int $id
+     *
+     * @return bool
+     */
+    public function actionAddAjax(int $id): bool
     {
         $cart_obj = new Cart();
 
@@ -25,7 +38,10 @@ class CartController
         return true;
     }
 
-    public function actionIndex()
+    /**
+     * @return bool
+     */
+    public function actionIndex(): bool
     {
         if (!isset($_SESSION['products'])) {
             echo 'Cart is empty.';
