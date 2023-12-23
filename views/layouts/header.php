@@ -12,6 +12,7 @@ use App\Cart\Cart;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book shop</title>
     <link rel="stylesheet" href="/templates/css/style.css">
+    <link rel="stylesheet" href="/templates/css/zebra_pagination.css">
 </head>
 
 <body>

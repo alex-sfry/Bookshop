@@ -109,15 +109,16 @@ class User
     }
 
     /**
-     * @return int
+     * @return int | null
      */
-    public function checkLogged(): int
+    public function checkLogged(): int | null
     {
         if (isset($_SESSION['user'])) {
             return $_SESSION['user'];
         }
 
         header("Location: /user/login");
+        return null;
     }
 
     /**

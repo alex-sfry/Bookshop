@@ -42,7 +42,8 @@
                     </div>
                 <?php endforeach; ?>
             </div>
-            <?= $pagination->init(); ?>
+<!--            --><?php //= $pagination->init(); ?>
+            <?= $pagination ?>
         </section>
     </div>
 </main>

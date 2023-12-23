@@ -1,5 +1,5 @@
 {
     "require": {
-        "jasongrimes/paginator": "~1.0"
+        "stefangabos/zebra_pagination": "^2.4"
     }
 }

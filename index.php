@@ -1,6 +1,7 @@
 <?php
 
-// namespace App\Core;
+namespace App\Core;
+require $_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php';
 use Vic\Router\Router;
 
 ini_set('display_errors', 1);

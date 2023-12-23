@@ -4,27 +4,17 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitc44c70e347ecdf92ee4501a9cf9b0fd7
+class ComposerStaticInitc626a8455c89ffc96e47b63cf93d83ac
 {
-    public static $prefixesPsr0 = array (
-        'J' => 
-        array (
-            'JasonGrimes' => 
-            array (
-                0 => __DIR__ . '/..' . '/jasongrimes/paginator/src',
-            ),
-        ),
-    );
-
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Zebra_Pagination' => __DIR__ . '/..' . '/stefangabos/zebra_pagination/Zebra_Pagination.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixesPsr0 = ComposerStaticInitc44c70e347ecdf92ee4501a9cf9b0fd7::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitc44c70e347ecdf92ee4501a9cf9b0fd7::$classMap;
+            $loader->classMap = ComposerStaticInitc626a8455c89ffc96e47b63cf93d83ac::$classMap;
 
         }, null, ClassLoader::class);
     }

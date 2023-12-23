@@ -7,14 +7,7 @@ namespace Vic\Router;
  */
 class Router
 {
-    /**
-     * @var array
-     */
     private array $routes;
-
-    /**
-     * @var string
-     */
     private string $namespace;
 
     /**
@@ -28,12 +21,14 @@ class Router
     }
 
     /**
-     * @return string
+     * @return string | null
      */
-    private function getURI(): string
+    private function getURI(): string | null
     {
         if (!empty($_SERVER['REQUEST_URI'])) {
             return trim($_SERVER['REQUEST_URI'], '/');
+        } else {
+            return null;
         }
     }
 

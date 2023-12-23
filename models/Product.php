@@ -14,10 +14,16 @@ class Product
     /**
      * @param int $count
      * @param int $page
+     * @param object | null $pagination
      *
      * @return array
      */
-    public function getLatestProducts(int $count = self::SHOW_BY_DEFAULT, int $page = 1): array
+    public function getLatestProducts(
+        int $count = self::SHOW_BY_DEFAULT,
+        int $page = 1,
+        object $pagination = null
+    ):
+    array
     {
         $db = new DBConnect();
         $conn = $db->getConnection();
@@ -29,37 +35,33 @@ class Product
 
         $productList = array();
 
-        $sql = 'SELECT books.id AS id, author_id, `name`, price, `image`, isNew, authors.id AS a_id, author
+        $limit = $pagination ? (($pagination->get_page() - 1) * $count) . ', ' . $count : $offset . ', ' . $count;
+
+//        $sql = 'SELECT books.id AS id, author_id, `name`, price, `image`, isNew, authors.id AS a_id, author
+//                FROM books, authors
+//                WHERE status = "1"
+//                AND author_id = authors.id
+//                ORDER BY books.id DESC
+//                LIMIT ' . $count . ' OFFSET ' . $offset;
+
+        $sql = '
+                SELECT books.id AS id, author_id, `name`, price, `image`, isNew, authors.id AS a_id, author
                 FROM books, authors
                 WHERE status = "1"
                 AND author_id = authors.id
                 ORDER BY books.id DESC
-                LIMIT ' . $count . ' OFFSET ' . $offset;
+                LIMIT ' . $limit . '
+        ';
 
-        $result = $conn->prepare($sql);
-        $result->execute();
-
-        $i = 0;
-
-        while ($row = $result->fetch()) {
-            $productList[$i]['id'] = $row['id'];
-            $productList[$i]['author'] = $row['author'];
-            $productList[$i]['name'] = $row['name'];
-            $productList[$i]['price'] = $row['price'];
-            $productList[$i]['image'] = $row['image'];
-            $productList[$i]['isNew'] = $row['isNew'];
-            $i++;
-        }
-
-        return $productList;
+        return $this->getProductsList($conn, $sql, $productList);
     }
 
     /**
-     * @param int $count_per_page
+//     * @param int $count_per_page
      *
      * @return int
      */
-    public function getLatestProductsPagesCount(int $count_per_page = self::SHOW_BY_DEFAULT): float
+    public function getLatestProductsPagesCount(/*int $count_per_page = self::SHOW_BY_DEFAULT*/): int
     {
         $db = new DBConnect();
         $conn = $db->getConnection();
@@ -71,18 +73,19 @@ class Product
         $result->execute();
 
         $count = $result->fetchColumn();
-        $pages_count = $count / $count_per_page;
+//        $pages_count = $count / $count_per_page;
 
-        return  $pages_count;
+//        return  $pages_count;
+        return $count;
     }
 
     /**
-     * @param mixed int
+     * @param int | bool $categoryId
      * @param int $page
      *
-     * @return array
+     * @return array | null
      */
-    public function getProductsListByCategory(int | bool $categoryId = false, int $page = 1): array
+    public function getProductsListByCategory(int | bool $categoryId = false, int $page = 1): array | null
     {
         if ($categoryId) {
             $db = new DBConnect();
@@ -102,31 +105,18 @@ class Product
                     LIMIT " . self::SHOW_BY_DEFAULT
                     . " OFFSET " . $offset;
 
-            $result = $conn->prepare($sql);
-            $result->execute();
-
-            $i = 0;
-
-            while ($row = $result->fetch()) {
-                $products[$i]['id'] = $row['id'];
-                $products[$i]['author'] = $row['author'];
-                $products[$i]['name'] = $row['name'];
-                $products[$i]['price'] = $row['price'];
-                $products[$i]['image'] = $row['image'];
-                $products[$i]['isNew'] = $row['isNew'];
-                $i++;
-            }
-
-            return $products;
+            return $this->getProductsList($conn, $sql, $products);
+        } else {
+            return null;
         }
     }
 
     /**
-     * @param mixed int
+     * @param int | bool $categoryId
      *
-     * @return int
+     * @return int | null
      */
-    public function getProductsByCategoryPagesCount(int | bool $categoryId = false): float
+    public function getProductsByCategoryPagesCount(int | bool $categoryId = false): int | null
     {
         if ($categoryId) {
             $db = new DBConnect();
@@ -140,9 +130,11 @@ class Product
             $result->execute();
 
             $count = $result->fetchColumn();
-            $pages_count = $count / self::SHOW_BY_DEFAULT;
+//            $pages_count = $count / self::SHOW_BY_DEFAULT;
 
-            return  $pages_count;
+            return  $count;
+        } else {
+            return null;
         }
     }
 
@@ -168,6 +160,35 @@ class Product
             $result->execute();
 
             return $result->fetch();
+        } else {
+            return null;
         }
+    }
+
+    /**
+     * @param \PDO $conn
+     * @param string $sql
+     * @param array $productList
+     *
+     * @return array
+     */
+    public function getProductsList(\PDO $conn, string $sql, array $productList): array
+    {
+        $result = $conn->prepare($sql);
+        $result->execute();
+
+        $i = 0;
+
+        while ($row = $result->fetch()) {
+            $productList[$i]['id'] = $row['id'];
+            $productList[$i]['author'] = $row['author'];
+            $productList[$i]['name'] = $row['name'];
+            $productList[$i]['price'] = $row['price'];
+            $productList[$i]['image'] = $row['image'];
+            $productList[$i]['isNew'] = $row['isNew'];
+            $i++;
+        }
+
+        return $productList;
     }
 }
